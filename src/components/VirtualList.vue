@@ -1,9 +1,9 @@
 <template>
-  <div ref="list" class="infinite-list-container" @scroll="handleScroll($event)">
-    <div class="infinite-list-phantom" :style="{ height: listHeight + 'px' }"></div>
-    <div ref="content" class="infinite-list">
+  <div ref="list" class="list-container" @scroll="handleScroll($event)">
+    <div class="list-phantom" :style="{ height: listHeight + 'px' }"></div>
+    <div ref="content" class="virtual-scrolling-list">
       <div ref="items"
-        class="infinite-list-item"
+        class="virtual-scrolling-list-item"
         v-for="item in visibleData"
         :key="item"
         :style="{height: itemSize + 'px'}"
@@ -105,27 +105,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.infinite-list-container {
+.list-container {
   height: 100%;
   overflow: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
 }
-.infinite-list-phantom {
+.list-phantom {
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
   z-index: -1;
 }
-.infinite-list {
+.virtual-scrolling-list {
   left: 0;
   right: 0;
   top: 0;
   position: absolute;
   text-align: center;
 }
-.infinite-list-item {
+.virtual-scrolling-list-item {
   display: flex;
   justify-content: center;
   align-items: center;

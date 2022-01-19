@@ -1,4 +1,4 @@
-# infinite-list
+# virtual-scrolling-list
 
 ## Project setup
 ```
