@@ -1,26 +1,39 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <VirtualList :listData="listData" :itemSize="68" v-slot="slotItem">
+    <div :item="slotItem.item">{{slotItem.item}}</div>
+  </VirtualList>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VirtualList from './components/VirtualList.vue'
+import { reactive, toRefs } from 'vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VirtualList
+  },
+  setup() {
+    const state = reactive({
+      listData: []
+    })
+    state.listData = Array.from(Array(500).keys())
+    return {
+      ...toRefs(state)
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  margin:0;
+}
+#app{
+  height:100%;
 }
 </style>
