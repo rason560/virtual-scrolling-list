@@ -44,8 +44,6 @@ export default {
       //结束索引
       end:null,
     })
-    //获取list Dom
-    const list = ref(null)
     //获取content Dom
     const content = ref(null)
     //列表总高度
@@ -74,9 +72,9 @@ export default {
       state.end = state.start + visibleCount.value
     })
 
-    function handleScroll () {
+    function handleScroll (e) {
       //当前滚动位置
-      let scrollTop = list.value.scrollTop
+      let scrollTop = e.target.scrollTop
        //此时的开始索引
       state.start = Math.floor(scrollTop / props.itemSize);
       //此时的结束索引
@@ -84,7 +82,7 @@ export default {
       //此时的偏移量
       if (state.start >= threshold.value) {
         state.startOffset = scrollTop - (threshold.value * props.itemSize) - (scrollTop % props.itemSize)
-        content.value.style.transform = `translate3d(0,${state.startOffset}px,0)`
+        content.value.style.transform = getTransform.value
       } else {
         content.value.style.transform = `translate3d(0,0,0)`
       }
@@ -92,7 +90,6 @@ export default {
 
     return {
       ...toRefs(state),
-      list,
       content,
       listHeight,
       getTransform,
